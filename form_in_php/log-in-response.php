@@ -1,15 +1,14 @@
-<h1>Sono
-    la
-    risposta
-    (RESPONSE)</h1>
-    <?php
-    echo "<pre>";
-    echo "get:";
-    print_r($_GET);
-    echo "post";
-    print_r($_POST);
-    echo "</pre>";
+<?php
+/**
+ *$ = variabile
+ *"/" =  stringa
+ * se non c'è niente è una costante
+ */
+$test = filter_input(INPUT_GET,'email',FILTER_VALIDATE_EMAIL);
 
-    echo "la tua email è <br>";
-    echo "<strong>". $_GET["email"] . "</strong>";
-    ?>
+if($test == false){
+    echo "\nla mail non è valida\n";
+}else{
+    echo "la mail è valida: $test";
+}
+?>
