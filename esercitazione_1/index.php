@@ -1,18 +1,3 @@
-Scrivere una funzione "array2ul" che dato un array come argomento
-restituisce una stringa 
-
-/**
-return una stringa che rappresenta un elenco html (ul)
- */
-String array2ul(Array $array)
-
-echo array2ul(array("rosso","verde"));
-
-<!-- <ul>
-    <li>rosso</li>
-    <li>verde</li>
-</ul> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +7,26 @@ echo array2ul(array("rosso","verde"));
     <title>Document</title>
 </head>
 <body>
+
+    <!-- Scrivere una funzione "array2ul" che dato un array come argomento
+restituisce una stringa 
+
+/**
+return una stringa che rappresenta un elenco html (ul)
+ */
+String array2ul(Array $array)
+
+echo array2ul(array("rosso","verde")); -->
+
+<!-- <ul>
+    <li>rosso</li>
+    <li>verde</li>
+</ul> -->
     <?php
 
     $sport = array("calcio", "nuoto", "basket");
+    $film = array("inception", "interstellar", "dunkirk", "memento");
+    $manga = array("dragon ball", "naruto", "one piece");
 
     function array2ul (array $array) {
         echo "<ul>";
@@ -35,6 +37,8 @@ echo array2ul(array("rosso","verde"));
     }
 
     echo array2ul($sport);
+    echo array2ul($film);
+    echo array2ul($manga);
 
     ?>
 </body>
