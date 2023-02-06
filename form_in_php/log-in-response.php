@@ -8,8 +8,8 @@
     print_r($_GET);
     echo "post";
     print_r($_POST);
-    echo "<pre>";
+    echo "</pre>";
 
     echo "la tua email è <br>";
-    echo "<strong>". $_POST["email"] . "</strong>";
+    echo "<strong>". $_GET["email"] . "</strong>";
     ?>
