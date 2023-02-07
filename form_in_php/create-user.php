@@ -31,15 +31,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="birthday" class="form-label">data di nascita</label>  
-                        <input type="birthday" class="form-control" name="birthday" id="birthday">
+                        <input type="date" class="form-control" name="birthday" id="birthday">
                     </div>
                     <div class="mb-3">
                         <label for="birth_place" class="form-label">luogo di nascita</label>  
                         <input type="birth_place" class="form-control" name="birth_place" id="birth_place">
                     </div>
                     <div class="mb-3">
-                        <label for="gender" class="form-label">sesso</label>  
-                        <input type="gender" class="form-control" name="gender" id="gender">
+                        <label for="gender" class="form-label">sesso</label> 
+                        <select name="gender" id="gender">
+                            <option value=""></option>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">nome utente</label>  
