@@ -16,10 +16,10 @@
     <main class="container">
 
         <section class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <form class="mt-1 mt-md-5" action="register-user.php" method="post"> 
                     <div class="mb-3">
                         <label for="nome" class="form-label">nome</label>  
@@ -60,7 +60,7 @@
 
             
             
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 
             </div>
         </section>

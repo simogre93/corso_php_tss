@@ -1,13 +1,16 @@
 <?php
 
-// print_r($_POST);
+$first_name = filter_input(INPUT_POST,'first_name');
 
-$user = filter_input(INPUT_POST,'username',FILTER_VALIDATE_EMAIL);
-// var_dump($user == false);
+//whitespace char (TAB/BARRA SPAZIO) restituisce stringa di spazi | campo obbligatorio
+//se non passo dal form restituisce NULL | errore
+//se compilato restituisce una stringa | ok
+//non compilo stringa "" | campo obbligatorio
+var_dump($first_name);
 
-if(!$user){
-    echo "\nla mail non è valida\n";
-}else{
-    echo "registrazione avvenuta con successo";
-}
+
 ?>
+
+
+
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, excepturi tempore eius voluptates voluptas, ut quas, itaque aperiam molestiae ex harum est obcaecati cum debitis cumque beatae saepe consequatur provident.</p>
