@@ -4,6 +4,7 @@
 //print_r($files);
 
 //cosa prendere, come import in java
+require "./form_in_php/class/validator/Validable.php";
 require "./form_in_php/class/validator/ValidateMail.php";
 
 $emails = [

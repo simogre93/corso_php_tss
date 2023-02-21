@@ -3,7 +3,9 @@
 //validate required obbligatorio, non può essere vuoto
 //array di array
 
+require "./form_in_php/class/validator/Validable.php";
 require "./form_in_php/class/validator/ValidateRequired.php";
+
 
 $testCases = [
     [
@@ -32,6 +34,14 @@ $testCases = [
     ],
     [
         'input' => '<b>ciao</b>',
+        'expected' => 'ciao'
+    ],
+    [
+        'input' => '<b>ciao',
+        'expected' => 'ciao'
+    ],
+    [
+        'input' => 'ciao</b>',
         'expected' => 'ciao'
     ],
     [
