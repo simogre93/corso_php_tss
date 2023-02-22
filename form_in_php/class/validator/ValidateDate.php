@@ -7,10 +7,10 @@ Class ValidateDate implements Validable {
         $date = trim(strip_tags($value));
         $dataCorretta = DateTime::createFromFormat('d/m/Y', $date);
 
-         if($dataCorretta){
-            return $dataCorretta -> format('d/m/Y');
+         if($dataCorretta && $dataCorretta->format('d/m/Y') === $date){
+            return $dataCorretta->format('d/m/Y');
          }else {
-             return $dataCorretta;
+             return false;
          }
 
 
