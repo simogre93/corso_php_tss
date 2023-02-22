@@ -1,3 +1,16 @@
+<?php
+
+// //print_r($_SERVER['REQUEST_METHOD']);
+// if($_SERVER['REQUEST_METHOD'] === 'POST'){
+//     echo "dati inviati, controlla facendo validazione";
+
+// } else {
+//     echo "utente deve ancora compilare il form";
+// }
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -20,41 +33,57 @@
                 
             </div>
             <div class="col-sm-6">
-                <form class="mt-1 mt-md-5" action="register-user.php" method="post"> 
+                <form class="mt-1 mt-md-5" action="create-user.php" method="post"> 
                     <div class="mb-3">
-                        <label for="nome" class="form-label">nome</label>  
-                        <input type="nome" class="form-control" name="first_name" id="nome">
+                        <label for="first_name" class="form-label">nome</label>  
+                        <input type="text" class="form-control" name="first_name" id="first_name">
+                        <!-- is-invalid -->
+                        <div class="invalid-feedback">
+                            errore
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="cognome" class="form-label">cognome</label>  
-                        <input type="cognome" class="form-control" name="last_name" id="cognome">
+                        <label for="last_name" class="form-label">cognome</label>  
+                        <input type="text" class="form-control" name="last_name" id="last_name">
+                        <div class="invalid-feedback">
+                            errore
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="birthday" class="form-label">data di nascita</label>  
                         <input type="date" class="form-control" name="birthday" id="birthday">
+                        <div class="invalid-feedback">
+                            errore
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="birth_place" class="form-label">luogo di nascita</label>  
-                        <input type="birth_place" class="form-control" name="birth_place" id="birth_place">
+                        <input type="text" class="form-control" name="birth_place" id="birth_place">
+                        <div class="invalid-feedback">
+                            errore
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">sesso</label> 
-                        <select name="gender" id="gender">
+                        <select name="gender" class="form-select" id="gender">
                             <option value=""></option>
                             <option value="M">M</option>
                             <option value="F">F</option>
                         </select>
+                        <div class="invalid-feedback">Errore</div>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">nome utente</label>  
-                        <input type="username" class="form-control" name="username" id="username">
+                        <input type="text" class="form-control" name="username" id="username">
+                        <div class="invalid-feedback">Errore</div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">password</label>
-                        <input type="password" id="password" name="password" class="form-control">
+                        <input type="text" id="password" name="password" class="form-control">
+                        <div class="invalid-feedback">Errore</div>
                     </div>
 
-                    <button class="btn btn-primary btn-sm" type="submit">Registrazione</button>
+                    <button class="btn btn-primary btn-sm" type="submit">Registrati</button>
                 </form>
             </div>
 
