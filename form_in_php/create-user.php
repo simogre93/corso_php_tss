@@ -16,7 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //operatore ternario ? e : per scrivere if veloci e assegnazioni
     $isValidNameClass = $validatorName->isValid($_POST['first_name']) ? '' : 'is-invalid';
 
-    var_dump($_POST);
+    $validatorLastName = new ValidateRequired();
+    $validatedLastName = $validatorLastName->isValid($_POST['last_name']);
+    $isValidLastNameClass = $validatorLastName->isValid($_POST['last_name']) ? '' : 'is-invalid';
+
+    /*$validatorBirthday = new ValidateRequired();
+    $validatorBirthday = $validatorBirthday->isValid($_POST['birthday']);
+    $isValidBirthday = $validatorBirthday->isValid($_POST['birthday']) ? '' : 'is-invalid';*/
+   
+   
+   
+    /* per i radio button dei gender
+    $validatorGender = new ValidateRequired();
+    var_dump(isset($_POST['gender']));
+    $_gender = !isset($_POST['gender']) ? '' : $_POST['gender']);
+    $validatorGender->isValid($_gender);*/
 }
 
 /** questo script viene eseguito quanod visualizzo per la prima volta il form */
@@ -71,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="last_name" class="form-label">cognome</label>
-                        <input type="text" class="form-control <?php echo $isValidNameClass ?>" name="last_name" id="last_name">
+                        <input type="text" class="form-control <?php echo $isValidLastNameClass ?>" name="last_name" id="last_name">
                         <?php
-                        if (isset($validatedName) && !$validatedName) { ?>
+                        if (isset($validatedLastName) && !$validatedLastName) { ?>
                             <div class="invalid-feedback">
                                 il cognome è obbligatorio
                             </div>
@@ -113,13 +127,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <option value="F">F</option>
                         </select>
                         <?php
-                        if (isset($validatedName) && !$validatedName) { ?>
+                        if (isset($validatedName) && !$validatedName) : ?>
                             <div class="invalid-feedback">
                                 il genere è obbligatorio
                             </div>
                         <?php
-                        }
+                        endif//if() : endif sintassi alternativa if 
                         ?>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">nome utente</label>
