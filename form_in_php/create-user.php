@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <form class="mt-1 mt-md-5" action="create-user.php" method="post">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">nome</label>
-                        <input type="text" class="form-control <?php echo $isValidNameClass ?>" name="first_name" id="first_name">
+                        <input type="text" value="<?= $_POST['first_name'] ?>" class="form-control <?php echo $isValidNameClass ?>" name="first_name" id="first_name">
                         <!-- mettere is-invalid -->
                         <?php
                         //GET isset($validatedName) prova a usare una variabile e se non esiste(false) non da warning
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <?php
                         if (isset($validatedUserName) && !$validatedUserName) { ?>
                             <div class="invalid-feedback">
-                                il nome utente è obbligatorio
+                                il nome utente è obbligatorio e deve essere una email
                             </div>
                         <?php
                         }
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">password</label>
-                        <input type="text" id="password" name="password" class="form-control <?php echo $isValidPassword ?>">
+                        <input type="password" id="password" name="password" class="form-control <?php echo $isValidPassword ?>">
                         <?php
                         if (isset($validatedPassword) && !$validatedPassword) { ?>
                             <div class="invalid-feedback">
