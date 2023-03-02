@@ -2,6 +2,9 @@
 
 Class ValidateDate implements Validable {
 
+    private $message;
+    private $valid;
+
     public function isValid($value) 
     {
         $date = trim(strip_tags($value));
@@ -15,5 +18,15 @@ Class ValidateDate implements Validable {
 
 
         return $dataCorretta;
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function getValid()
+    {
+        return $this->valid;
     }
 }

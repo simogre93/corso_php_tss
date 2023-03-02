@@ -52,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <form class="mt-1 mt-md-5" action="create-user.php" method="post">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">nome</label>
-                        <input type="text" value="<?= $validatorName->getValue() ?>" class="form-control <?php !$validatorName->getValid() ? 'is-invalid' : '' ?>" name="first_name" id="first_name">
+                        <input type="text" value="<?= $validatorName->getValue() ?>" class="form-control <?php echo !$validatorName->getValid() ? 'is-invalid' : '' ?>" name="first_name" id="first_name">
                         <!-- mettere is-invalid -->
                         <?php
                         //GET isset($validatedName) prova a usare una variabile e se non esiste(false) non da warning
                         //POST isset($validatedName) in questo caso da true, nel nostro caso
-                        if ($validatorName->getValid()) { ?>
+                        if (!$validatorName->getValid()) { ?>
                             <div class="invalid-feedback">
                                 <?= $validatorName->getMessage() ?>
                             </div>
