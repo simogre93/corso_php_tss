@@ -115,10 +115,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">genere</label>
-                        <select name="gender" class="form-select <?php echo !$validatorBirthPlace->getValid() ? 'is-invalid' : '' ?>" id="gender">
+                        <select name="gender" class="form-select <?php echo !$validatorGender->getValid() ? 'is-invalid' : '' ?>" id="gender">
                             <option value=""></option>
-                            <option value="M">M</option>
-                            <option value="F">F</option>
+                            <option value="M <?= $validatorGender->getValue() ?>">M</option>
+                            <option value="F <?= $validatorGender->getValue() ?>">F</option>
                         </select>
                         <?php
                         if (!$validatorGender->getValid()) : ?>
