@@ -15,6 +15,7 @@ $validatorBirthPlace = new ValidateRequired('', 'il luogo di nascita è obbligat
 $validatorGender = new ValidateRequired('', 'il genere è obbligatorio');
 $validatorMail = new ValidateMail('', 'la mail è obbligatoria');
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "dati inviati, controlla facendo validazione";
 
@@ -116,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <label for="gender" class="form-label">genere</label>
                         <select name="gender" class="form-select <?php echo !$validatorBirthPlace->getValid() ? 'is-invalid' : '' ?>" id="gender">
                             <option value=""></option>
-                            <option value="M <?= $validatorBirthPlace->getValue() ?>">M</option>
-                            <option value="F <?= $validatorBirthPlace->getValue() ?>">F</option>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
                         </select>
                         <?php
                         if (!$validatorGender->getValid()) : ?>
