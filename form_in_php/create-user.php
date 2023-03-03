@@ -5,15 +5,24 @@
 //error_reporting(0); li spegne tutti
 require "./class/validator/Validable.php";
 require "./class/validator/ValidateRequired.php";
+require "./class/validator/ValidateMail.php";
 
-//print_r($_POST);
+print_r($_POST);
 
 $validatorName = new ValidateRequired('', 'il nome è obbligatorio');
+$validatorLastName = new ValidateRequired('', 'il cognome è obbligatorio');
+$validatorBirthPlace = new ValidateRequired('', 'il luogo di nascita è obbligatorio');
+$validatorGender = new ValidateRequired('', 'il genere è obbligatorio');
+$validatorMail = new ValidateMail('', 'la mail è obbligatoria');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "dati inviati, controlla facendo validazione";
 
     $validatedName = $validatorName->isValid($_POST['first_name']);
+    $validatedLastName = $validatorLastName->isValid($_POST['last_name']);
+    $validatedBirthPlace = $validatorBirthPlace->isValid($_POST['birth_place']);
+    $validatedGender = $validatorGender->isValid($_POST['gender']);
+    $validatedMail = $validatorMail->isValid($_POST['username']);
     
 }
 
@@ -69,11 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="last_name" class="form-label">cognome</label>
-                        <input type="text" class="form-control <?php echo $isValidLastNameClass ?>" name="last_name" id="last_name">
+                        <input type="text" value="<?= $validatorLastName->getValue() ?>" class="form-control <?php echo !$validatorLastName->getValid() ? 'is-invalid' : '' ?>" name="last_name" id="last_name">
                         <?php
-                        if (isset($validatedLastName) && !$validatedLastName) { ?>
+                        if (!$validatorLastName->getValid()) { ?>
                             <div class="invalid-feedback">
-                                il cognome è obbligatorio
+                                <?= $validatorLastName->getMessage() ?>
                             </div>
                         <?php
                         }
@@ -93,11 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="birth_place" class="form-label">luogo di nascita</label>
-                        <input type="text" class="form-control <?php echo $isValidBirthPlace ?>" name="birth_place" id="birth_place">
+                        <input type="text" value="<?= $validatorBirthPlace->getValue() ?>" class="form-control <?php echo !$validatorBirthPlace->getValid() ? 'is-invalid' : '' ?>" name="birth_place" id="birth_place">
                         <?php
-                        if (isset($validatedBirthPlace) && !$validatedBirthPlace) { ?>
+                        if (!$validatorBirthPlace->getValid()) { ?>
                             <div class="invalid-feedback">
-                                il luogo di nascita è obbligatorio
+                                <?= $validatorBirthPlace->getMessage() ?>
                             </div>
                         <?php
                         }
@@ -105,15 +114,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">genere</label>
-                        <select name="gender" class="form-select <?php echo $isValidGender ?>" id="gender">
+                        <select name="gender" class="form-select <?php echo !$validatorBirthPlace->getValid() ? 'is-invalid' : '' ?>" id="gender">
                             <option value=""></option>
-                            <option value="M">M</option>
-                            <option value="F">F</option>
+                            <option value="M <?= $validatorBirthPlace->getValue() ?>">M</option>
+                            <option value="F <?= $validatorBirthPlace->getValue() ?>">F</option>
                         </select>
                         <?php
-                        if (isset($validatedGender) && !$validatedGender) : ?>
+                        if (!$validatorGender->getValid()) : ?>
                             <div class="invalid-feedback">
-                                il genere è obbligatorio
+                                <?= $validatorGender->getMessage() ?>
                             </div>
                         <?php
                         endif//if() : endif sintassi alternativa if 
@@ -121,12 +130,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">nome utente</label>
-                        <input type="text" class="form-control <?php echo $isValidUserName ?>" name="username" id="username">
+                        <label for="username" class="form-label">email</label>
+                        <input type="text" value="<?= $validatorMail->getValue() ?>" class="form-control <?php echo !$validatorMail->getValid() ? 'is-invalid' : '' ?>" name="username" id="username">
                         <?php
-                        if (isset($validatedUserName) && !$validatedUserName) { ?>
+                        if (!$validatorMail->getValid()) { ?>
                             <div class="invalid-feedback">
-                                il nome utente è obbligatorio e deve essere una email
+                            <?= $validatorMail->getMessage() ?>
                             </div>
                         <?php
                         }
