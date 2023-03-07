@@ -6,7 +6,7 @@
 require "./class/validator/Validable.php";
 require "./class/validator/ValidateRequired.php";
 require "./class/validator/ValidateMail.php";
-
+//trghrth
 print_r($_POST);
 
 $validatorName = new ValidateRequired('', 'il nome è obbligatorio');
@@ -117,8 +117,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <label for="gender" class="form-label">genere</label>
                         <select name="gender" class="form-select <?php echo !$validatorGender->getValid() ? 'is-invalid' : '' ?>" id="gender">
                             <option value=""></option>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            <option value="M <?= $validatorBirthPlace->getValue() ?>">M</option>
+                            <option value="F <?= $validatorBirthPlace->getValue() ?>">F</option>
+=======
                             <option value="M <?= $validatorGender->getValue() ?>">M</option>
                             <option value="F <?= $validatorGender->getValue() ?>">F</option>
+>>>>>>> 2d56b97 (esercitazione 3 in progress)
+=======
+                            <option value="M <?= $validatorGender->getValue() ?>">M</option>
+                            <option value="F <?= $validatorGender->getValue() ?>">F</option>
+>>>>>>> 19689ea1272276c21e1ee6fd40d280e98f145491
                         </select>
                         <?php
                         if (!$validatorGender->getValid()) : ?>
