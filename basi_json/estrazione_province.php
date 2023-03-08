@@ -16,9 +16,10 @@ try {
     foreach ($province_object as $provincia) {
         
         $provincia_nome = addslashes($provincia->nome);
-        $provincia_sigla = addslashes($provincia->sigla);
+        $provincia_sigla = $provincia->sigla;
         $regione_id = $provincia->regione;
-        $regione_id =  $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"")->fetchColumn();
+        $id_query = $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"");
+        $regione_id = $id_query->fetchColumn();
         
         $sql = "INSERT INTO province (nome, sigla, regione_id) VALUES ('$provincia_nome' , '$provincia_sigla' , '$regione_id');";
         echo $sql ."\n";
