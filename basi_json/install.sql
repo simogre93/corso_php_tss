@@ -27,7 +27,7 @@ SELECT * FROM province;
 
 INSERT INTO regioni (nome) VALUES ('Valle d\'Aosta/Vallée d\'Aoste');
 
-SELECT regione_id FROM regioni WHERE nome= 'Sicilia';
+SELECT regione_id FROM regioni WHERE nome= 'Piemonte';
 
 -- svuota tabella lasciando struttura intatta 
 TRUNCATE TABLE regioni;

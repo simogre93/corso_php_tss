@@ -20,15 +20,15 @@ $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME;
 try {
     $conn = new PDO($dsn,DB_USER,DB_PASSWORD);
     
-    //$conn->query('TRUNCATE TABLE province');
+    $conn->query('TRUNCATE TABLE province');
 
     foreach ($province_object as $provincia) {
         
         $provincia_nome = addslashes($provincia->nome);
         $provincia_sigla = addslashes($provincia->sigla);
-        $regione_id =  $conn->query("SELECT regione_id FROM regioni WHERE nome=\'$provincia->regione\'")->fetchColumn();
-
-        $sql = "INSERT INTO regioni (nome, sigla, regione_id) VALUES ('$provincia_nome'.'$provincia_sigla'.'$regione_id');";
+        $regione_id =  $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"");
+        
+        $sql = "INSERT INTO province (nome, sigla, regione_id) VALUES ('$provincia_nome' , '$provincia_sigla' , '$regione_id');";
         echo $sql ."\n";
         $conn->query($sql);
     }
