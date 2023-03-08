@@ -23,7 +23,11 @@ insert INTO regioni (nome) VALUES ('Abruzzo');
 
 SELECT * FROM regioni;
 
+SELECT * FROM province;
+
 INSERT INTO regioni (nome) VALUES ('Valle d\'Aosta/Vallée d\'Aoste');
+
+SELECT regione_id FROM regioni WHERE nome= 'Sicilia';
 
 -- svuota tabella lasciando struttura intatta 
 TRUNCATE TABLE regioni;
