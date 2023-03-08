@@ -22,7 +22,7 @@ $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME;
 try {
     $conn = new PDO($dsn,DB_USER,DB_PASSWORD);
     
-    $conn->query('TRUNCATE TABLE regioni');
+    //$conn->query('TRUNCATE TABLE regioni');
 
     foreach ($regioni_unique as $regione) {
         $regione = addslashes($regione);

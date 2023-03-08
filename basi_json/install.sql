@@ -7,7 +7,17 @@ CREATE TABLE regioni (
     PRIMARY KEY (regione_id)
 );
 
+CREATE TABLE province (
+    province_id int NOT NULL AUTO_INCREMENT,
+    nome varchar(255) NOT NULL,
+    sigla char(2) NOT NULL,
+    regione_id int,
+    PRIMARY KEY (province_id),
+    FOREIGN KEY (regione_id) REFERENCES regioni (regione_id)
+);
 --drop table regioni;
+
+--drop table province;
 
 insert INTO regioni (nome) VALUES ('Abruzzo');
 
