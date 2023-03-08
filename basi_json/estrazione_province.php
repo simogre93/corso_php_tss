@@ -18,6 +18,8 @@ try {
         $provincia_nome = addslashes($provincia->nome);
         $provincia_sigla = $provincia->sigla;
         $regione_id = $provincia->regione;
+        
+        //$regione_id =  $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"")->fetchColumn();
         $id_query = $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"");
         $regione_id = $id_query->fetchColumn();
         
@@ -30,7 +32,5 @@ try {
 } catch (\Throwable $th) {
     throw $th;
 }
-
-//print_r($regioni_unique);
 
 ?>
