@@ -3,11 +3,12 @@
 //spegenre errori a livello di server e anche runtime(durante esecuzione) 
 //error_reporting(E_ALL); li vede tutti
 //error_reporting(0); li spegne tutti
+require "../config.php";
+require "./class/validator/Registry/it/Regione.php";
 require "./class/validator/Validable.php";
 require "./class/validator/ValidateRequired.php";
 require "./class/validator/ValidateMail.php";
-//trghrth
-print_r($_POST);
+//print_r($_POST);
 
 $validatorName = new ValidateRequired('', 'il nome è obbligatorio');
 $validatorLastName = new ValidateRequired('', 'il cognome è obbligatorio');
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         }
                         ?>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="birth_place" class="form-label">luogo di nascita</label>
                         <input type="text" value="<?= $validatorBirthPlace->getValue() ?>" class="form-control <?php echo !$validatorBirthPlace->getValid() ? 'is-invalid' : '' ?>" name="birth_place" id="birth_place">
                         <?php
@@ -112,23 +113,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <?php
                         }
                         ?>
+                    </div> -->
+
+                    <div class="mb-3">
+                        <div class="row">
+                        <div class="col">
+                            <label for="birth_city" class="form-label">Città</label>
+                            <input type="text" class="form-control" name="birth_city" id="birth_city">
+                        </div>
+                        <div class="col">
+                            <label for="birth_region" class="form-label">Regione</label>
+                            <select id="birth_region" class="birth_region form-select" name="birth_region">
+                                <option value=""></option>
+                                <?php foreach (Regione::all() as $regione) : ?>
+                                    
+                                    <option value="<?= $regione->regione_id ?>"><?= $regione->nome ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="birth_province" class="form-label">Provincia</label>
+                            <select id="birth_province" class="birth_province form-select" name="birth_province">
+                                <option value=""></option>
+                                <option value="12">Asti</option>
+                            </select>
+                        </div>
+                        </div>
                     </div>
+
+
                     <div class="mb-3">
                         <label for="gender" class="form-label">genere</label>
                         <select name="gender" class="form-select <?php echo !$validatorGender->getValid() ? 'is-invalid' : '' ?>" id="gender">
                             <option value=""></option>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <option value="M <?= $validatorBirthPlace->getValue() ?>">M</option>
-                            <option value="F <?= $validatorBirthPlace->getValue() ?>">F</option>
-=======
                             <option value="M <?= $validatorGender->getValue() ?>">M</option>
                             <option value="F <?= $validatorGender->getValue() ?>">F</option>
->>>>>>> 2d56b97 (esercitazione 3 in progress)
-=======
-                            <option value="M <?= $validatorGender->getValue() ?>">M</option>
-                            <option value="F <?= $validatorGender->getValue() ?>">F</option>
->>>>>>> 19689ea1272276c21e1ee6fd40d280e98f145491
                         </select>
                         <?php
                         if (!$validatorGender->getValid()) : ?>
