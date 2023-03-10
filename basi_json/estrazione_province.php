@@ -19,7 +19,7 @@ try {
         $provincia_sigla = $provincia->sigla;
         $regione_id = $provincia->regione;
         
-        //$regione_id =  $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"")->fetchColumn();
+        
         $id_query = $conn->query("SELECT regione_id FROM regioni WHERE nome=\"$provincia->regione\"");
         $regione_id = $id_query->fetchColumn();
         
