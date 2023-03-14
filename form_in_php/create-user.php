@@ -3,14 +3,16 @@
 //spegenre errori a livello di server e anche runtime(durante esecuzione) 
 //error_reporting(E_ALL); li vede tutti
 //error_reporting(0); li spegne tutti
+
+use Registry\it\Provincia;
+use Registry\it\Regione;
+use validator\ValidateDate;
+use validator\ValidateMail;
+use validator\ValidateRequired;
+
 require "../config.php";
-require "./class/Registry/it/Regione.php";
-require "./class/Registry/it/Provincia.php";
-require "./class/validator/Validable.php";
-require "./class/validator/ValidateDate.php";
-require "./class/validator/ValidateRequired.php";
-require "./class/validator/ValidateMail.php";
-//print_r($_POST);
+require "./autoload.php";
+
 
 $validatorName = new ValidateRequired('', 'il nome è obbligatorio');
 $validatorLastName = new ValidateRequired('', 'il cognome è obbligatorio');
