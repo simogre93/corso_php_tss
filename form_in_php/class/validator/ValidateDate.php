@@ -1,4 +1,5 @@
 <?php
+namespace validator;
 
 class ValidateDate implements Validable {
 
@@ -20,7 +21,8 @@ class ValidateDate implements Validable {
         $strip_tag = strip_tags($value);
         $sanitize = trim($strip_tag);
         
-        $dt = DateTime::createFromFormat('d/m/Y',$sanitize);
+        // usare \ per le classi che fanno parte del namespace globale, equivale a use \dataime scritto sopra
+        $dt = \DateTime::createFromFormat('d/m/Y',$sanitize);
         if($dt && $dt->format('d/m/Y') === $sanitize) {
 
             return $dt->format('d/m/Y');

@@ -1,4 +1,5 @@
 <?php
+namespace validator;
 /**
  * - [ok] preservare valore del campo di testo, non cancellarlo
  * - visualizzare il messaggio di errore per il singolo campo

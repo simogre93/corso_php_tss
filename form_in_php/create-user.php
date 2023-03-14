@@ -4,8 +4,8 @@
 //error_reporting(E_ALL); li vede tutti
 //error_reporting(0); li spegne tutti
 require "../config.php";
-require "./class/validator/Registry/it/Regione.php";
-require "./class/validator/Registry/it/Provincia.php";
+require "./class/Registry/it/Regione.php";
+require "./class/Registry/it/Provincia.php";
 require "./class/validator/Validable.php";
 require "./class/validator/ValidateDate.php";
 require "./class/validator/ValidateRequired.php";
