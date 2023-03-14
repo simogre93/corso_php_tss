@@ -18,7 +18,7 @@ class ValidateRequired implements Validable{
     private $valid;
     
     //__()magic method, innescati in casi particolari
-    public function __construct($default_value='', $message='il nome è obbligatorio') {
+    public function __construct($default_value='', $message='') {
         $this->value = $default_value;
         $this->valid = true;
         $this->message = $message;
