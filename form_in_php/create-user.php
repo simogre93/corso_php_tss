@@ -9,51 +9,30 @@ use Registry\it\Regione;
 use validator\ValidateDate;
 use validator\ValidateMail;
 use validator\ValidateRequired;
+use validator\ValidatorRunner;
 
 require "../config.php";
 require "./autoload.php";
 
 
-$validatorName = new ValidateRequired('', 'il nome è obbligatorio');
-$validatorLastName = new ValidateRequired('', 'il cognome è obbligatorio');
-$validatorBirthday  = new ValidateDate('', 'La data di nascità non è valida');
-$validatorCitta = new ValidateRequired('', 'la città è obbligatoria');
-$validatorRegione = new ValidateRequired('', 'la regione è obbligatoria');
-$validatorProvincia = new ValidateRequired('', 'la provincia è obbligatoria');
-$validatorGender = new ValidateRequired('', 'il genere è obbligatorio');
-$validatorMail = new ValidateMail('', 'la mail è obbligatoria');
-$validatorPassword = new ValidateRequired('', 'la password è obbligatoria');
+$validatorRunner = new ValidatorRunner([
+    'first_name' => new ValidateRequired('', 'il nome è obbligatorio'),
+    'last_name' => new ValidateRequired('', 'il cognome è obbligatorio'),
+    'birthday'  => new ValidateDate('', 'La data di nascità non è valida'),
+    'birth_city' => new ValidateRequired('', 'la città è obbligatoria'),
+    'birth_region' => new ValidateRequired('', 'la regione è obbligatoria'),
+    'birth_province' => new ValidateRequired('', 'la provincia è obbligatoria'),
+    'gender' => new ValidateRequired('', 'il genere è obbligatorio'),
+    'username' => new ValidateMail('', 'la mail è obbligatoria'),
+    'password' => new ValidateRequired('', 'la password è obbligatoria'),
+]);
 
-
+extract($validatorRunner->getValidatorList());
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "dati inviati, controlla facendo validazione";
-
-    $validatorName->isValid($_POST['first_name']);
-    $validatorLastName->isValid($_POST['last_name']);
-    $validatorBirthday->isValid($_POST['birthday']);
-    $validatorCitta->isValid($_POST['birth_city']);
-    $validatorRegione->isValid($_POST['birth_region']);
-    $validatorProvincia->isValid($_POST['birth_province']);
-    $validatorGender->isValid($_POST['gender']);
-    $validatorMail->isValid($_POST['username']);
-    $validatorPassword->isValid($_POST['password']);
-
-    //runner per validazione form e invio dati al server sql per memorizzarli
-    if($validatorName->getValid() && $validatorLastName->getValid()){
-
-    }
-
-
+    
+    $validatorRunner->isValid();
+    extract($validatorRunner->getValidatorList());
 }
-
-
-/** questo script viene eseguito quanod visualizzo per la prima volta il form */
-// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-//     //$validatedName = false; per non far scattare il warning oppure usare isset
-//     $isValidNameClass = '';
-// }
-
-
 
 ?>
 
