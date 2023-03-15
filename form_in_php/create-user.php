@@ -37,13 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $validatorGender->isValid($_POST['gender']);
     $validatorMail->isValid($_POST['username']);
     $validatorPassword->isValid($_POST['password']);
+
+    //runner per validazione form e invio dati al server sql per memorizzarli
+    if($validatorName->getValid() && $validatorLastName->getValid()){
+
+    }
+
+
 }
 
+
 /** questo script viene eseguito quanod visualizzo per la prima volta il form */
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //$validatedName = false; per non far scattare il warning oppure usare isset
-    $isValidNameClass = '';
-}
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     //$validatedName = false; per non far scattare il warning oppure usare isset
+//     $isValidNameClass = '';
+// }
 
 
 
