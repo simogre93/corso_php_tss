@@ -26,12 +26,15 @@ $validatorRunner = new ValidatorRunner([
     // 'username:email'  => new ValidateMail('','Formato email non valido'),
     'password'  => new ValidateRequired('','Password è obbligatorio')
 ]);
-extract($validatorRunner->getValidatorList());
 
+extract($validatorRunner->getValidatorList());
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $validatorRunner->isValid();
    
+    if($validatorRunner->getValid()){
+        echo "posso inviare i dati al server";
+    }
 }
 
 
@@ -168,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Nome Utente / EMAIL</label>
-                        <input type="text" class="form-control 
+                        <input type="text" value="<?= $username->getValue() ?>" class="form-control 
                             <?php echo (!$username->getValid() && !$username->getValid()) ? 'is-invalid':'' ?>" name="username" id="username">
                         <?php
                         //if (!$username_email->getValid()) : ?>
@@ -186,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="text" id="password" name="password" class="form-control <?php echo !$password->getValid() ? 'is-invalid' : ''  ?>">
+                        <input type="password" value="<?= $password->getValue() ?>" id="password" name="password" class="form-control <?php echo !$password->getValid() ? 'is-invalid' : ''  ?>">
                         <?php
                         if (!$password->getValid()) : ?>
                             <div class="invalid-feedback">
