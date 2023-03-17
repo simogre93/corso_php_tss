@@ -1,17 +1,18 @@
 <?php
 
-use Registry\it\Provincia;
-use Registry\it\Regione;
-use validator\ValidateDate;
-use validator\ValidateMail;
-use validator\ValidateRequired;
+// use Registry\it\Provincia;
+// use Registry\it\Regione;
+// use validator\ValidateDate;
+// use validator\ValidateMail;
+// use validator\ValidateRequired;
 
-require "./config.php";
+//evita di usare due volte lo stesso file
+//require_once "./config.php";
 
 //cosa deve fare quando cerca una funzione o una classe
 spl_autoload_register(function($className){
     
-    echo "\nsto cercando $className\n";
+    //echo "\nsto cercando $className\n";
     
     $className = str_replace("\\","/",$className);
     
@@ -19,8 +20,8 @@ spl_autoload_register(function($className){
 });
 
 
-new ValidateMail();
-new ValidateDate();
-new ValidateRequired();
-Regione::all();
-Provincia::all();
+// new ValidateMail();
+// new ValidateDate();
+// new ValidateRequired();
+// Regione::all();
+// Provincia::all();
