@@ -22,18 +22,16 @@ $user->password =  md5('password');
 
 $crud->create($user);
 
-$result = $crud->read();
+$result = $crud->read(1);
+
 if(count($result) == 1) {
-    echo "test utente inserito ok";
+    echo "test utente inserito ok\n";
 }
-
-
-//print_r($result);
 
 try {
     $crud->create($user);
 } catch (\Throwable $th) {
-    if($th->getMessage() == "23000"){
+    if($th->getCode() == "23000"){
         echo "Test superato";
     };
 }
