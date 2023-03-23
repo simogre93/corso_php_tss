@@ -18,15 +18,15 @@ require "./autoload.php";
  * TODO: Implementare criteri mutipli di valiidazione (array di validazioni non singole)
  */
 
-print_r($_POST);
+//print_r($_POST);
 
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
     'last_name'  => new ValidateRequired('','Il cognome è obblicatorio'),
     'birthday'  => new ValidateDate('','La data di nascità non è valida'),
     'birth_city'  => new ValidateRequired('','La città è obbligatoria'),
-    'birth_region'  => new ValidateRequired('','La regione è obbligatoria'),
-    'birth_province'  => new ValidateRequired('','La provincia è obbligatoria'),
+    'regione_id'  => new ValidateRequired('','La regione è obbligatoria'),
+    'provincia_id'  => new ValidateRequired('','La provincia è obbligatoria'),
     'gender'  => new ValidateRequired('','Il Genere è obbligatorio'),
     'username'  => new ValidateRequired('','Username è obbligatorio'),
     // 'username:email'  => new ValidateMail('','Formato email non valido'),
@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = User::arrayToUser($_POST);
         $crud = new UserCRUD();
         $crud->create($user); 
+    }else {
+        echo "il form non è valido";
     }
 }
 
@@ -132,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col">
                         
                         <label for="birth_region" class="form-label">Regione</label>
-                        <select id="birth_region" class="form-select <?php echo !$birth_region->getValid() ? 'is-invalid' :'' ?> birth_region" name="birth_region">
+                        <select id="birth_region" class="form-select <?php echo !$birth_region->getValid() ? 'is-invalid' :'' ?> birth_region" name="regione_id">
                                 <option value=""></option>
                                 <?php foreach(Regione::all() as $regione) : ?> 
                                     <option value="<?= $regione->regione_id ?>"><?= $regione->nome ?></option>
@@ -148,12 +150,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         <div class="col">
                         <label for="birth_province" class="form-label">Provincia</label>
-                        <select id="birth_province" class="form-select <?php echo !$birth_province->getValid() ? 'is-invalid' :'' ?> birth_province" name="birth_province">
+                        <select id="birth_province" class="form-select <?php echo !$birth_province->getValid() ? 'is-invalid' :'' ?> birth_province" name="provincia_id">
                         <option value=""></option>
                                 <?php foreach(Provincia::all() as $provincia) : ?> 
                                     <option value="<?= $provincia->provincia_id ?>" ><?= $provincia->nome ?></option>
                                 <?php endforeach;  ?>
-                                <!-- <?php echo $birth_province->getValue() == $provincia->provincia_nome ? 'selected':''  ?> -->
+                                <?php echo $birth_province->getValue() == $provincia->provincia_nome ? 'selected':''  ?>
                         </select>
                         <?php
                         if (!$birth_province->getValid()) : ?>
