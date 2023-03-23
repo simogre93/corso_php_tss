@@ -18,6 +18,7 @@ require "./autoload.php";
  * TODO: Implementare criteri mutipli di valiidazione (array di validazioni non singole)
  */
 
+print_r($_POST);
 
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
@@ -131,23 +132,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col">
                         
                         <label for="birth_region" class="form-label">Regione</label>
-                        <select id="birth_region" class="form-select birth_region" name="birth_region">
+                        <select id="birth_region" class="form-select <?php echo !$birth_region->getValid() ? 'is-invalid' :'' ?> birth_region" name="birth_region">
                                 <option value=""></option>
                                 <?php foreach(Regione::all() as $regione) : ?> 
                                     <option value="<?= $regione->regione_id ?>"><?= $regione->nome ?></option>
                                 <?php endforeach;  ?>
                         </select>
-
+                        <?php
+                        if (!$birth_region->getValid()) : ?>
+                            <div class="invalid-feedback">
+                                <?php echo $birth_region->getMessage() ?>  
+                            </div>
+                        <?php endif; ?>   
                         </div>
+                        
                         <div class="col">
                         <label for="birth_province" class="form-label">Provincia</label>
-                        <select id="birth_province" class="form-select birth_province" name="birth_province">
+                        <select id="birth_province" class="form-select <?php echo !$birth_province->getValid() ? 'is-invalid' :'' ?> birth_province" name="birth_province">
                         <option value=""></option>
                                 <?php foreach(Provincia::all() as $provincia) : ?> 
-                                    <option value="<?= $provincia->provincia_id ?>"><?= $provincia->nome ?></option>
+                                    <option value="<?= $provincia->provincia_id ?>" ><?= $provincia->nome ?></option>
                                 <?php endforeach;  ?>
+                                <!-- <?php echo $birth_province->getValue() == $provincia->provincia_nome ? 'selected':''  ?> -->
                         </select>
-                            
+                        <?php
+                        if (!$birth_province->getValid()) : ?>
+                            <div class="invalid-feedback">
+                                <?php echo $birth_province->getMessage() ?>  
+                            </div>
+                        <?php endif; ?>    
                     </div>
                     </div>
                 </div>
