@@ -1,6 +1,8 @@
 
 <?php
 
+use crud\UserCRUD;
+use models\User;
 use Registry\it\Provincia;
 use Registry\it\Regione;
 use validator\ValidateDate;
@@ -15,6 +17,8 @@ require "./autoload.php";
 /**
  * TODO: Implementare criteri mutipli di valiidazione (array di validazioni non singole)
  */
+
+
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
     'last_name'  => new ValidateRequired('','Il cognome è obblicatorio'),
@@ -23,7 +27,7 @@ $validatorRunner = new ValidatorRunner([
     'birth_region'  => new ValidateRequired('','La regione è obbligatoria'),
     'birth_province'  => new ValidateRequired('','La provincia è obbligatoria'),
     'gender'  => new ValidateRequired('','Il Genere è obbligatorio'),
-    'username'  => new ValidateRequired('','Username è obbligaztorio'),
+    'username'  => new ValidateRequired('','Username è obbligatorio'),
     // 'username:email'  => new ValidateMail('','Formato email non valido'),
     'password'  => new ValidateRequired('','Password è obbligatorio')
 ]);
@@ -34,7 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $validatorRunner->isValid();
    
     if($validatorRunner->getValid()){
-        echo "posso inviare i dati al server";
+        
+        echo "posso inviare dati";
+        $user = User::arrayToUser($_POST);
+        $crud = new UserCRUD();
+        $crud->create($user); 
     }
 }
 
@@ -112,8 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col">
                         
                         <label for="birth_city" class="form-label">Città</label>
-                        <input type="text" class="form-control" name="birth_city" id="birth_city">
-
+                        <input type="text" value="<?= $birth_city->getValue() ?>" class="form-control <?php echo !$birth_city->getValid() ? 'is-invalid':'' ?>" name="birth_city" id="birth_city">
+                        <?php if (!$birth_city->getValid()) : ?>
+                            <div class="invalid-feedback">
+                                <?php echo $birth_city->getMessage() ?>
+                            </div>
+                        <?php endif ?>
 
                     </div>
                     <div class="col">
