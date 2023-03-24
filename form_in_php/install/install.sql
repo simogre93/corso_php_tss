@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `province`;
 CREATE TABLE `province` (
-  `province_id` int(11) NOT NULL,
+  `provincia_id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `sigla` char(2) NOT NULL,
   `regione_id` int(11) DEFAULT NULL

@@ -17,6 +17,9 @@ class ValidatorRunner
     public function isValid()
     {
         foreach ($this->validatorList as $name_attribute => $instance_validator) {
+            if(!isset($_POST[$name_attribute])){
+                $_POST[$name_attribute] = "";
+            }
             $instance_validator->isValid($_POST[$name_attribute]);
         }
     }

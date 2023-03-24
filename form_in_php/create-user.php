@@ -18,14 +18,15 @@ require "./autoload.php";
  * TODO: Implementare criteri mutipli di valiidazione (array di validazioni non singole)
  */
 
+//print_r($_POST);
 
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
     'last_name'  => new ValidateRequired('','Il cognome è obblicatorio'),
     'birthday'  => new ValidateDate('','La data di nascità non è valida'),
     'birth_city'  => new ValidateRequired('','La città è obbligatoria'),
-    'birth_region'  => new ValidateRequired('','La regione è obbligatoria'),
-    'birth_province'  => new ValidateRequired('','La provincia è obbligatoria'),
+    'regione_id'  => new ValidateRequired('','La regione è obbligatoria'),
+    'provincia_id'  => new ValidateRequired('','La provincia è obbligatoria'),
     'gender'  => new ValidateRequired('','Il Genere è obbligatorio'),
     'username'  => new ValidateRequired('','Username è obbligatorio'),
     // 'username:email'  => new ValidateMail('','Formato email non valido'),
@@ -39,10 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     if($validatorRunner->getValid()){
         
-        echo "posso inviare dati";
+        echo "dati inviati";
         $user = User::arrayToUser($_POST);
         $crud = new UserCRUD();
         $crud->create($user); 
+    }else {
+        echo "il form non è valido";
     }
 }
 
@@ -131,23 +134,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col">
                         
                         <label for="birth_region" class="form-label">Regione</label>
-                        <select id="birth_region" class="form-select birth_region" name="birth_region">
+                        <select id="birth_region" class="form-select <?php echo !$regione_id->getValid() ? 'is-invalid' :'' ?> birth_region" name="regione_id">
                                 <option value=""></option>
                                 <?php foreach(Regione::all() as $regione) : ?> 
-                                    <option value="<?= $regione->regione_id ?>"><?= $regione->nome ?></option>
+                                    <option <?php echo $regione_id->getValue() == $regione->regione_id ? 'selected':''  ?> value="<?= $regione->regione_id ?>"><?= $regione->nome ?></option>
                                 <?php endforeach;  ?>
                         </select>
-
-                        </div>
+                        <?php
+                        if (!$regione_id->getValid()) : ?>
+                            <div class="invalid-feedback">
+                                <?php echo $regione_id->getMessage() ?>  
+                            </div>
+                        <?php endif; ?> 
+                    </div>
+                        
                         <div class="col">
                         <label for="birth_province" class="form-label">Provincia</label>
-                        <select id="birth_province" class="form-select birth_province" name="birth_province">
-                        <option value=""></option>
+                        <select id="birth_province" class="form-select <?php echo !$provincia_id->getValid() ? 'is-invalid' :'' ?> birth_province" name="provincia_id">
+                                <option value=""></option>
                                 <?php foreach(Provincia::all() as $provincia) : ?> 
-                                    <option value="<?= $provincia->provincia_id ?>"><?= $provincia->nome ?></option>
-                                <?php endforeach;  ?>
+                                    <option <?php echo $provincia_id->getValue() == $provincia->provincia_id ? 'selected':''  ?>  value="<?= $provincia->provincia_id ?>" ><?= $provincia->nome ?></option>
+                                <?php endforeach;  ?>        
                         </select>
-                            
+                        <?php
+                        if (!$provincia_id->getValid()) : ?>
+                            <div class="invalid-feedback">
+                                <?php echo $provincia_id->getMessage() ?>  
+                            </div>
+                        <?php endif; ?>  
                     </div>
                     </div>
                 </div>

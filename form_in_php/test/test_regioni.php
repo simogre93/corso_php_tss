@@ -1,6 +1,9 @@
 <?php
 
 # php form_in_php/test/test_regioni.php
+
+//use Registry\it\Regione;
+
 require './config.php';
 require "./form_in_php/class/validator/Registry/it/Regione.php";
 
