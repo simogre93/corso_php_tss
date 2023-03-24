@@ -24,6 +24,7 @@ $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
     'last_name'  => new ValidateRequired('','Il cognome è obblicatorio'),
     'birthday'  => new ValidateDate('','La data di nascità non è valida'),
+    'birthday'  => new ValidateRequired('','La data di nascità non è valida'),
     'birth_city'  => new ValidateRequired('','La città è obbligatoria'),
     'regione_id'  => new ValidateRequired('','La regione è obbligatoria'),
     'provincia_id'  => new ValidateRequired('','La provincia è obbligatoria'),
@@ -204,4 +205,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
         </section>
-<?php require "./class/views/footer-view.php" ?>
+
+
+
+
+
+        <?php require "./class/views/footer-view.php" ?>
