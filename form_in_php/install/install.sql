@@ -1,3 +1,4 @@
+-- Active: 1678006997442@@127.0.0.1@3306@form_in_php
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -39,7 +40,7 @@ CREATE TABLE `province` (
 -- Dump dei dati per la tabella `province`
 --
 
-INSERT INTO `province` (`province_id`, `nome`, `sigla`, `regione_id`) VALUES
+INSERT INTO `province` (`provincia_id`, `nome`, `sigla`, `regione_id`) VALUES
 (1, 'Agrigento', 'AG', 15),
 (2, 'Alessandria', 'AL', 12),
 (3, 'Ancona', 'AN', 10),
@@ -224,7 +225,7 @@ INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `birthday`, `birth_cit
 -- Indici per le tabelle `province`
 --
 ALTER TABLE `province`
-  ADD PRIMARY KEY (`province_id`),
+  ADD PRIMARY KEY (`provincia_id`),
   ADD KEY `regione_id` (`regione_id`);
 
 --
@@ -250,7 +251,7 @@ ALTER TABLE user
 -- AUTO_INCREMENT per la tabella `province`
 --
 ALTER TABLE `province`
-  MODIFY `province_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `provincia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT per la tabella `regioni`

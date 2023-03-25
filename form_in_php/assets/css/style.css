@@ -1,5 +1,5 @@
 .footer-bottom {
-    position: static;
+    position: fixed;
     width: 100%;
     bottom: 0;
 }
