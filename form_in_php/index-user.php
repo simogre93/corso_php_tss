@@ -18,15 +18,20 @@ $users = (new UserCRUD())->read();;
         <th>Nome</th>
         <th>Cognome</th>
         <th>Comune</th>
+        <th>Azioni</th>
     </tr>
     <tr>
         <!-- dati tabella -->
-        <?php foreach ($users as $users) { ?>
+        <?php foreach ($users as $user) { ?>
             <tr>
-                <td><?= $users->user_id ?></td>
-                <td><?= $users->first_name ?></td>
-                <td><?= $users->last_name ?></td>
-                <td><?= $users->birth_city ?></td>
+                <td><?= $user->user_id ?></td>
+                <td><?= $user->first_name ?></td>
+                <td><?= $user->last_name ?></td>
+                <td><?= $user->birth_city ?></td>
+                <td>
+                    <a href="edit-user.php?user_id=<?=$user->user_id ?>" class="btn btn-primary btn-sm">modifica</a>
+                    <a href="delete-user.php?user_id=<?=$user->user_id ?>" class="btn btn-danger btn-sm">elimina</a>
+                </td>  
             </tr>
         <?php } ?>
     </tr>

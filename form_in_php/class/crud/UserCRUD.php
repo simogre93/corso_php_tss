@@ -22,13 +22,14 @@ class UserCRUD {
         $stm->bindValue(':provincia_id', $user->provincia_id, \PDO::PARAM_INT);
         $stm->bindValue(':gender', $user->gender, \PDO::PARAM_STR);
         $stm->bindValue(':username', $user->username, \PDO::PARAM_STR);
-        $stm->bindValue(':password', $user->password, \PDO::PARAM_STR);
+        $stm->bindValue(':password', md5($user->password), \PDO::PARAM_STR);
         $stm->execute();
 
     }
 
     public function update(User $user)
-    {
+    {   
+        echo "ciao";
         $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
         $query = "UPDATE user SET first_name=:first_name, last_name=:last_name, 
                     birthday=:birthday, birth_city=:birth_city, regione_id=:regione_id, 
@@ -43,12 +44,12 @@ class UserCRUD {
         $stm->bindValue(':provincia_id', $user->provincia_id, \PDO::PARAM_INT);
         $stm->bindValue(':gender', $user->gender, \PDO::PARAM_STR);
         $stm->bindValue(':username', $user->username, \PDO::PARAM_STR);
-        $stm->bindValue(':password', $user->password, \PDO::PARAM_STR);
-        //$stm->bindValue(':user_id', $user->user_id, \PDO::PARAM_INT);
+        $stm->bindValue(':password', md5($user->password), \PDO::PARAM_STR);
+        $stm->bindValue(':user_id', $user->user_id, \PDO::PARAM_INT);
         $stm->execute();
     }
 
-    public function read(int $user_id=null)
+    public function read(int $user_id=null):User|array|bool
     {
         $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
         if(!is_null($user_id)){

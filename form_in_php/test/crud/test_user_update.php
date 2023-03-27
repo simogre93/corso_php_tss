@@ -24,13 +24,15 @@ include "form_in_php/test/test_autoload.php";
     
     print_r($crud->read(1));
 
+    //die();
+    
     $user = $crud->read(1);
     $user->first_name = "Aldo";
     $user->last_name = "Blu";
-    $user->birthday = "2020-10-15";
-    $user->birth_city = "Torino";
-    $user->id_provincia = "96";
-    $user->id_regione = "12";
+    $user->birthday = "2021-03-12";
+    $user->birth_city = "Roma";
+    $user->id_provincia = "85";
+    $user->id_regione = "7";
     $user->gender = "M";
     $user->username = "aldoblu@mail.com";
     $user->password = md5('password');
