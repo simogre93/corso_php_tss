@@ -1,4 +1,3 @@
-
 <?php
 
 use crud\UserCRUD;
@@ -12,13 +11,6 @@ use validator\ValidatorRunner;
 
 require "../config.php";
 require "./autoload.php";
-
-// die();
-/**
- * TODO: Implementare criteri mutipli di valiidazione (array di validazioni non singole)
- */
-
-//print_r($_POST);
 
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired('','Il nome è obblicatorio'),
