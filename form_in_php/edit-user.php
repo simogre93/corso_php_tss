@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $crud = new UserCRUD();
         $crud->update($user);
         //redirect
-        //header("location: index-user.php");
+        header("location: index-user.php");
     }else {
         echo "il form non è valido";
     }
@@ -190,13 +190,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" value="<?= $password->getValue() ?>" id="password" name="password" class="form-control <?php echo !$password->getValid() ? 'is-invalid' : ''  ?>">
-                        <?php
+                        <input type="password" value="<?= $password->getValue() ?>" id="password" name="password" class="form-control">
+                        <!-- <?php
                         if (!$password->getValid()) : ?>
                             <div class="invalid-feedback">
                                <?php echo $password->getMessage() ?>
                             </div>
-                        <?php endif ?>
+                        <?php endif ?> -->
                     </div>
 
                     <button class="btn btn-primary btn-sm" type="submit">Modifica</button>

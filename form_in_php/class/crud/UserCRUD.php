@@ -29,7 +29,6 @@ class UserCRUD {
 
     public function update(User $user)
     {   
-        echo "ciao";
         $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
         $query = "UPDATE user SET first_name=:first_name, last_name=:last_name, 
                     birthday=:birthday, birth_city=:birth_city, regione_id=:regione_id, 
