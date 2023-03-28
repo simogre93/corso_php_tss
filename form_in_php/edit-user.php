@@ -16,7 +16,8 @@ require "./autoload.php";
 $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
 $crud = new UserCRUD();
 $user =$crud->read($user_id);
-print_r($_POST);
+//print_r($user);
+//print_r($_POST);
 
 $validatorRunner = new ValidatorRunner([
     'first_name' => new ValidateRequired($user->first_name,'Il nome è obblicatorio'),
@@ -27,20 +28,23 @@ $validatorRunner = new ValidatorRunner([
     'regione_id'  => new ValidateRequired($user->regione_id,'La regione è obbligatoria'),
     'provincia_id'  => new ValidateRequired($user->provincia_id,'La provincia è obbligatoria'),
     'gender'  => new ValidateRequired($user->gender,'Il Genere è obbligatorio'),
-    'username'  => new ValidateRequired($user->username,'Username è obbligatorio'),
+    //'username'  => new ValidateRequired($user->username,'Username è obbligatorio'),
     // 'username:email'  => new ValidateMail($user->username,'Formato email non valido'),
-    'password'  => new ValidateRequired('','Password è obbligatorio')
+    //'password'  => new ValidateRequired('','Password è obbligatorio')
 ]);
 extract($validatorRunner->getValidatorList());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+    //echo "sono nel post di edit<br>";
+    //print_r($_GET);
     $validatorRunner->isValid();
    
     if($validatorRunner->getValid()){
-        
+
         $user = User::arrayToUser($_POST);
         $crud = new UserCRUD();
+        $user->user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
+        //print_r($user);
         $crud->update($user);
         //redirect
         header("location: index-user.php");
@@ -52,14 +56,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<!-- pronta a essere riusata se servisse -->
 <?php require "./class/views/head-view.php" ?>
 
     
 
         <section class="row">
             <div class="col-sm-8">
-                <form class="mt-1 mt-md-5" action="edit-user.php" method="post">
+                <form class="mt-1 mt-md-5" action="edit-user.php?user_id=<?=$user->user_id ?>" method="post">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">nome</label>
                         <input type="text" 
@@ -170,36 +173,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
                         
                     </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Nome Utente / EMAIL</label>
-                        <input type="text" value="<?= $username->getValue() ?>" class="form-control 
-                            <?php echo (!$username->getValid() && !$username->getValid()) ? 'is-invalid':'' ?>" name="username" id="username">
-                        <?php
-                        //if (!$username_email->getValid()) : ?>
-                            <div class="invalid-feedback">
-                            <?php //echo $username_email->getMessage() ?>
-                            </div>
-                        <?php // endif ?>
+                    
 
-                        <?php
-                        if (!$username->getValid()) : ?>
-                            <div class="invalid-feedback">
-                            <?php echo $username->getMessage() ?>
-                            </div>
-                        <?php endif ?>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" value="<?= $password->getValue() ?>" id="password" name="password" class="form-control">
-                        <!-- <?php
-                        if (!$password->getValid()) : ?>
-                            <div class="invalid-feedback">
-                               <?php echo $password->getMessage() ?>
-                            </div>
-                        <?php endif ?> -->
-                    </div>
-
-                    <button class="btn btn-primary btn-sm" type="submit">Modifica</button>
+                    <button class="btn btn-primary btn-sm" type="submit">Aggiorna</button>
                 </form>
             </div>
         </section>
