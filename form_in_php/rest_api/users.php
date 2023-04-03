@@ -59,6 +59,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $user = User::arrayToUser($request);
         $last_id = $crud->create($user);
+        
     
         // $response = [
         //     'data' => [
@@ -82,23 +83,32 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     case 'PUT' : 
         
+        $user_id = filter_input(INPUT_GET,'user_id');
         $input = file_get_contents('php://input');
-        $request = json_decode($input,true); // ottengo un array associativo
-
+        $request = json_decode($input,true); 
         $user = User::arrayToUser($request);
-        $last_id = $crud->update($user);
-    
-      
-        $user = (array) $user;
-        unset($user['password']);
-        $user['user_id'] = $last_id;
         
-        $response = [
-            'data' => $user, 
-            'status' => 202 
-        ];
+        if(!is_null($user_id)){
+            $rows = $crud->update($user, $user_id);
+            if($rows == 1){
+                
+                $user = (array) $user;
+                unset($user['username']);
+                unset($user['password']);
+                $user['user_id'] = $user_id;
+        
+                $response = [
+                'data' => $user, 
+                'status' => 202 
+                ];
+            }
 
-        echo json_encode($response);
+        
+
+           
+            
+            echo json_encode($response);
+        }
     break;    
     
     default:
