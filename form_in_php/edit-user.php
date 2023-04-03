@@ -13,8 +13,14 @@ require "../config.php";
 require "./autoload.php";
 
 $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
-$crud = new UserCRUD();
-$user =$crud->read($user_id);
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $crud = new UserCRUD();
+    $user =$crud->read($user_id);
+}else {
+    $user = User::arrayToUser($_POST);
+}
+    
 //print_r($user);
 //print_r($_POST);
 
