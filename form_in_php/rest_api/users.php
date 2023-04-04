@@ -56,7 +56,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $input = file_get_contents('php://input');
         $request = json_decode($input,true); // ottengo un array associativo
-
         $user = User::arrayToUser($request);
         $last_id = $crud->create($user);
         
@@ -83,32 +82,44 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     case 'PUT' : 
         
-        $user_id = filter_input(INPUT_GET,'user_id');
         $input = file_get_contents('php://input');
         $request = json_decode($input,true); 
         $user = User::arrayToUser($request);
+        $user_id = filter_input(INPUT_GET, 'user_id');
         
-        if(!is_null($user_id)){
+        if(!is_null($user_id)) {
             $rows = $crud->update($user, $user_id);
-            if($rows == 1){
-                
+
+            if($rows != 0) {
+                http_response_code(202);
+
                 $user = (array) $user;
-                unset($user['username']);
                 unset($user['password']);
+                unset($user['username']);
                 $user['user_id'] = $user_id;
-        
                 $response = [
-                'data' => $user, 
-                'status' => 202 
+                    'data' => $user,
+                    'status' => 202
                 ];
-            }
-
-        
-
-           
+                
+            } 
+            if($rows === 0) {
+                http_response_code(404);
+                    
+                $response = [
+                    'errore' => [
+                        [
+                            'status' => 404,
+                            'title' => "Utente non trovato",
+                            'details' => $user_id
+                        ]
+                    ]
+                ];
+                echo json_encode($response);
+            } 
             
-            echo json_encode($response);
         }
+        
     break;    
     
     default:
