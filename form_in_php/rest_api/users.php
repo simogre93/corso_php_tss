@@ -57,27 +57,40 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $input = file_get_contents('php://input');
         $request = json_decode($input,true); // ottengo un array associativo
         $user = User::arrayToUser($request);
-        $last_id = $crud->create($user);
+        //$last_id = $crud->create($user);
         
-    
-        // $response = [
-        //     'data' => [
-        //         'type' => "users", 
-        //         'id' => $last_id, 
-        //         'attribute' => $user
-        //     ]
-        // ];
-
-        $user = (array) $user;
-        unset($user['password']);
-        $user['user_id'] = $last_id;
+        try {
+            $last_id = $crud->create($user);
+            $user = (array) $user;
+            unset($user['password']);
+            $user['user_id'] = $last_id;
         
-        $response = [
-            'data' => $user, 
-            'status' => 202 
-        ];
+            $response = [
+                'data' => $user, 
+                'status' => 202 
+            ];
+        } catch (\Throwable $th) {
+            
+            http_response_code(422);
 
-        echo json_encode($response);
+                $response = [
+                    'errors' => [
+                        [
+                            'status' => 422,
+                            'title' => "formato errato",
+                            'details' => $th->getMessage(),
+                            'code' => $th->getCode()
+                         ]
+                    ]    
+                ];
+            
+            //echo json_encode($response);
+            //throw $th;
+        }
+
+      
+
+        echo json_encode($response, JSON_PRETTY_PRINT);
     break;
     
     case 'PUT' : 
