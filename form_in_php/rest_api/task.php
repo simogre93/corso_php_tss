@@ -15,10 +15,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         
         $task_id = filter_input(INPUT_GET,'task_id');
         if(!is_null($task_id)){
-            echo json_encode($crud->read($task_id));
+            echo json_encode($crud->read($task_id), JSON_PRETTY_PRINT);
         }else{
             $tasks = $crud->read();
-            echo json_encode($tasks);
+            echo json_encode($tasks, JSON_PRETTY_PRINT);
         }
     break;
 
@@ -48,7 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
            
             
-            echo json_encode($response);
+            echo json_encode($response, JSON_PRETTY_PRINT);
         }
     break;
     
@@ -68,7 +68,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             'status' => 202 
         ];
 
-        echo json_encode($response);
+        echo json_encode($response, JSON_PRETTY_PRINT);
     break;
     
     case 'PUT' : 
@@ -98,7 +98,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'data' => $task,
                 'status' => 202
             ];
-            echo json_encode($response);
+            echo json_encode($response, JSON_PRETTY_PRINT);
             
             if($rows === 0) {
                 http_response_code(404);
@@ -112,7 +112,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         ]
                     ]
                 ];
-                echo json_encode($response);
+                echo json_encode($response, JSON_PRETTY_PRINT);
             } 
             
         }
