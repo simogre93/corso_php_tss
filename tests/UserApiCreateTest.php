@@ -1,11 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+require_once "./config.php";
 
 class UserApiCreateTest extends TestCase {
 
     public function test_create_user_api()
-    {
+    { 
+        (new PDO(DB_DSN,DB_USER,DB_PASSWORD))->query("TRUNCATE TABLE user;");
         //payload contenuto da inviare
         $payload = [
             "first_name" => "Sara",
@@ -31,6 +33,7 @@ class UserApiCreateTest extends TestCase {
 
     public function post(string $url,array $body)
     {
+        //curl, command url, client http da linea di comando, fa chiamate
         $curl = curl_init();
         
         curl_setopt_array($curl, [
