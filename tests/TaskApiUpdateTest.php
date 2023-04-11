@@ -3,22 +3,21 @@
 use PHPUnit\Framework\TestCase;
 require_once "./config.php";
 
-class TaskApiCreateTest extends TestCase {
+class TaskApiUpdateTest extends TestCase {
 
-    public function test_create_task_api()
+    public function test_update_task_api()
     { 
-        (new PDO(DB_DSN,DB_USER,DB_PASSWORD))->query("TRUNCATE TABLE tasks;");
         //payload contenuto da inviare
         $payload = [
+            "task_id" => 1,
             "user_id" => 2,
-            "name" => "fare i test delle task",
-            "due_date" => "2017-03-17",
+            "name" => "fare la spesa",
+            "due_date" => "2023-08-15",
             "done" => 0
         ];
-        
-        $response = $this->post("http://localhost/corso_php_tss/form_in_php/rest_api/task.php",$payload);
 
-        //$this->assertNull($response);
+        $response = $this->put("http://localhost/corso_php_tss/form_in_php/rest_api/task.php", $payload);
+
         //come print_r
         fwrite(STDERR, print_r($response, TRUE)); 
         $this->assertJson($response);
@@ -26,7 +25,7 @@ class TaskApiCreateTest extends TestCase {
        
     }
 
-    public function post(string $url,array $body)
+    public function put(string $url, array $body)
     {
         $curl = curl_init();
         
@@ -37,7 +36,7 @@ class TaskApiCreateTest extends TestCase {
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_CUSTOMREQUEST => "PUT",
           CURLOPT_POSTFIELDS => json_encode($body),
           CURLOPT_HTTPHEADER => [
             "Accept: */*",
