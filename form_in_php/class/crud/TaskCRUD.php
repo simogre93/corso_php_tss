@@ -35,7 +35,7 @@ class TaskCRUD {
         $stm->bindValue(':done', $task->done, PDO::PARAM_BOOL);
         $stm->bindValue(':task_id', $task->task_id, \PDO::PARAM_INT);
         $stm->execute();
-        
+        return $stm->rowCount();
     }
 
     public function read(int $task_id=null):Task|array|bool
@@ -68,6 +68,38 @@ class TaskCRUD {
         }
         
         //return $result;
+    }
+    
+    public function readByUser(int $user_id=null):Task|array|bool
+    {
+        $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
+        if(!is_null($user_id)){
+            $query = "SELECT * FROM tasks WHERE user_id = :user_id";
+            $stm = $conn->prepare($query);
+            $stm->bindValue(':user_id',$user_id,PDO::PARAM_INT);
+            $stm->execute();
+            $result = $stm->fetchAll(PDO::FETCH_CLASS,Task::class);
+            if(count($result) == 1){
+                return $result[0];
+            }
+            // if(count($result)>1){
+            //     throw new \Exception("Chiave primaria duplicata", 1);    
+            // }
+            if(count($result) === 0){
+                return false;
+            }
+        }else{
+            $query = "SELECT * FROM tasks";
+            $stm = $conn->prepare($query);
+            $stm->execute();
+            $result = $stm->fetchAll(PDO::FETCH_CLASS,Task::class);
+            if(count($result) === 0) {
+                return false;
+            }
+            //return $result;
+        }
+        
+        return $result;
     }
 
     public function delete($task_id)
