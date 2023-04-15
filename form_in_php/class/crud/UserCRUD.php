@@ -50,7 +50,7 @@ class UserCRUD {
         
     }
 
-    public function read(int $user_id=null):User|array|bool
+    public function read(int $user_id=null)
     {
         $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
         if(!is_null($user_id)){

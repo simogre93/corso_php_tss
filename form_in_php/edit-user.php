@@ -9,7 +9,7 @@ use validator\ValidateMail;
 use validator\ValidateRequired;
 use validator\ValidatorRunner;
 
-require "../config.php";
+require "../config1.php";
 require "./autoload.php";
 
 $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //print_r($user);
         $crud->update($user);
         //redirect
-        header("location: index-user.php");
+        header("location: index.php");
     }else {
         echo "il form non è valido";
     }
