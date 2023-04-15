@@ -9,7 +9,7 @@ $users = (new UserCRUD())->read();;
 ?>
 
 <?php require "./class/views/head-view.php" ?>
-
+<a href="create-user.php" class="btn btn-primary btn-sm">Aggiungi Utente</a>
 <table class="table">
     <!-- riga tabella -->
     <tr>
