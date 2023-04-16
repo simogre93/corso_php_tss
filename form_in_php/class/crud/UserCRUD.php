@@ -28,11 +28,11 @@ class UserCRUD {
 
     }
 
-    public function update(User $user)
+    public function update($user_id, $user)
     {   
         
         $conn = new \PDO(DB_DSN, DB_USER,DB_PASSWORD);
-        $query = "UPDATE user SET first_name=:first_name, last_name=:last_name, 
+        $query = "UPDATE user  SET first_name=:first_name, last_name=:last_name, 
                     birthday=:birthday, birth_city=:birth_city, regione_id=:regione_id, 
                     provincia_id=:provincia_id, gender=:gender WHERE user_id = :user_id";
         $stm = $conn->prepare($query);
@@ -47,7 +47,7 @@ class UserCRUD {
         //$stm->bindValue(':password', md5($user->password), \PDO::PARAM_STR);
         $stm->bindValue(':user_id', $user->user_id, \PDO::PARAM_INT);
         $stm->execute();
-        
+        return $stm->rowCount();
     }
 
     public function read(int $user_id=null)

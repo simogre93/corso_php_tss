@@ -15,10 +15,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
         
         $user_id = filter_input(INPUT_GET,'user_id');
         if(!is_null($user_id)){
-            echo json_encode($crud->read($user_id));
+            $response = [
+                'data' => $crud->read($user_id),
+                'status' => 200
+            ];
+            echo json_encode($response, JSON_PRETTY_PRINT);
         }else{
             $users = $crud->read();
-            echo json_encode($users);
+            $response = [
+                'data' => $users,
+                'status' => 200
+            ];
+            echo json_encode($response, JSON_PRETTY_PRINT);
         }
     break;
 
@@ -28,7 +36,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if(!is_null($user_id)){
             $rows = $crud->delete($user_id);
             if($rows == 1){
-                http_response_code(204);
+                $response = [
+                    'data' => $user_id,
+                    'status' => 200
+                ];
+                echo json_encode($response, JSON_PRETTY_PRINT);
             }
 
             if($rows == 0 ){
@@ -40,15 +52,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         [
                             'status' => 404,
                             'title' => "Utente non trovato",
-                            'details' => $user_id
+                            'details' => "Utente id: " . $user_id
                          ]
                     ]    
                 ];
+                echo json_encode($response, JSON_PRETTY_PRINT);
             }
-
-           
-            
-            echo json_encode($response);
         }
     break;
     
@@ -87,50 +96,42 @@ switch ($_SERVER['REQUEST_METHOD']) {
             //echo json_encode($response);
             //throw $th;
         }
-
-      
-
         echo json_encode($response, JSON_PRETTY_PRINT);
     break;
     
     case 'PUT' : 
         
-        $input = file_get_contents('php://input');
-        $request = json_decode($input,true); 
+        $input =  file_get_contents('php://input');
+        $request = json_decode($input, true);
         $user = User::arrayToUser($request);
         $user_id = filter_input(INPUT_GET, 'user_id');
-        
-        if(!is_null($user_id)) {
-            $rows = $crud->update($user, $user_id);
 
-            if($rows != 0) {
-                http_response_code(202);
+        $rows = $crud->read($user_id);
 
-                $user = (array) $user;
-                unset($user['password']);
-                unset($user['username']);
-                $user['user_id'] = $user_id;
-                $response = [
-                    'data' => $user,
-                    'status' => 202
-                ];
-                
-            } 
-            if($rows === 0) {
-                http_response_code(404);
-                    
-                $response = [
-                    'errore' => [
-                        [
-                            'status' => 404,
-                            'title' => "Utente non trovato",
-                            'details' => $user_id
-                        ]
+        if ($rows == true) {
+            $crud->update($user_id, $user);
+            $user = (array) $user;
+            unset($user['password']);
+            unset($user['username']);
+            $response = [
+                'data' => [
+                    'type' => "user",
+                    'attributes' => $user
+                ]
+            ];
+            echo json_encode($response);
+        } else {
+            http_response_code(404);
+            $response = [
+                'errors' => [
+                    [
+                        'status' => 404,
+                        'title' => "Utente non trovato",
+                        'details' => "Utente id: " . $user_id
                     ]
-                ];
-                echo json_encode($response);
-            } 
-            
+                ]
+            ];
+            echo json_encode($response);
         }
         
     break;    

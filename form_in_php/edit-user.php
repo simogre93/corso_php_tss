@@ -9,7 +9,7 @@ use validator\ValidateMail;
 use validator\ValidateRequired;
 use validator\ValidatorRunner;
 
-require "../config1.php";
+require "./config.php";
 require "./autoload.php";
 
 $user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $crud = new UserCRUD();
         $user->user_id = filter_input(INPUT_GET, 'user_id', FILTER_VALIDATE_INT);
         //print_r($user);
-        $crud->update($user);
+        $crud->update($user_id, $user);
         //redirect
         header("location: index.php");
     }else {

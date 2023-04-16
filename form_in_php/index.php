@@ -9,7 +9,7 @@ $users = (new UserCRUD())->read();;
 ?>
 
 <?php require "./class/views/head-view.php" ?>
-<a href="create-user.php" class="btn btn-primary btn-sm">Aggiungi Utente</a>
+
 <table class="table">
     <!-- riga tabella -->
     <tr>
@@ -29,11 +29,12 @@ $users = (new UserCRUD())->read();;
                 <td><?= $user->last_name ?></td>
                 <td><?= $user->birth_city ?></td>
                 <td>
-                    <a href="edit-user.php?user_id=<?=$user->user_id ?>" class="btn btn-primary btn-sm">modifica</a>
-                    <a href="delete-user.php?user_id=<?=$user->user_id ?>" class="btn btn-danger btn-sm">elimina</a>
+                    <a href="edit-user.php?user_id=<?=$user->user_id ?>" class="btn btn-primary btn-sm">Modifica</a>
+                    <a href="delete-user.php?user_id=<?=$user->user_id ?>" class="btn btn-danger btn-sm">Elimina</a>
                 </td>  
             </tr>
         <?php } ?>
     </tr>
 </table>
+<a href="create-user.php" class="btn btn-success btn-sm">Aggiungi Utente</a>
 <?php require "./class/views/footer-view.php" ?>
