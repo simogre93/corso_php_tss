@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once "./config.php";
+require_once "./config1.php";
 
 class TaskApiReadTest extends TestCase {
 
@@ -11,9 +11,7 @@ class TaskApiReadTest extends TestCase {
         
         //come print_r
         fwrite(STDERR, print_r($response, TRUE)); 
-        $this->assertJson($response);
-
-       
+        $this->assertJson($response); 
     }
 
     public function get(string $url)

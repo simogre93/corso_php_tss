@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once "./config.php";
+require_once "./config1.php";
 
 class UserApiCreateTest extends TestCase {
 
