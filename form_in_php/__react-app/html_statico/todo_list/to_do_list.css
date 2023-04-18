@@ -1,0 +1,99 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: 	#1874CD;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    font-size: 20px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.avatar {
+    display: flex;
+}
+
+.avatar__img {
+    border-radius: 100%;
+    width: 90px;
+    margin-right: 1rem;
+}
+
+.container {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #EEEEE0;
+    padding: 20px;
+    border-radius: 20px;
+}
+  
+.search {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+  
+.add {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+}
+
+.date {
+    margin-top: 15px;
+}
+
+.task_date {
+    margin-right: 10px;
+}
+
+.filter {
+    margin-top: 15px;
+}
+
+.filter_btn {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+}
+  
+.task {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 5px;
+}
+
+input:checked + label {
+    text-decoration: line-through;
+}
+
+.delete_btn {
+    background-color: red;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}

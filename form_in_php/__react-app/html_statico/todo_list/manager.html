@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>To Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="to_do_list.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>To Do List</h1>
+    <div class="avatar">
+      <img class="avatar__img" src="https://i.pravatar.cc/150?img=13" alt="avatar">
+      <h2>Manager</h2>
+    </div>
+    <div class="task_add_search">
+      <input type="text" class="search" placeholder="Add / search">
+      <button type="submit" class="add">Add</button>
+      <div class="date">
+        <label for="date" class="task_date">Due date</label>
+        <input type="date" id="task_date" name="task_date">
+      </div>
+    </div>
+    <div class="filter">
+      <button class="filter_btn">All</button>
+      <button class="filter_btn">Active</button>
+      <button class="filter_btn">Completed</button>
+      
+    </div>
+    <div class="date">
+      <label for="date" class="task_date">Date</label>
+      <input type="date" id="task_date" name="task_date">
+      <button class="filter_btn">Today</button>
+    </div>
+    <ul class="list">
+      <div>
+        <p>Employee 1</p>
+        <li class="task">
+          <input type="checkbox" class="to_do" id="task1">
+          <label for="task1">Fare spesa</label>
+          <button class="delete_btn">X</button>
+        </li>
+      </div>
+      <div>
+        <p>Employee 2</p>
+        <li class="task">
+          <input type="checkbox" class="to_do" id="task2">
+          <label for="task2">Fare esercizi php</label>
+          <button class="delete_btn">X</button>
+        </li>
+        <li class="task">
+          <input type="checkbox" class="to_do" id="task3">
+          <label for="task3">Fare to do list</label>
+          <button class="delete_btn">X</button>
+        </li>
+      </div>
+    </ul>
+  </div>
+</body>
+
+</html>
