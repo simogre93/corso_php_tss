@@ -16,7 +16,7 @@ class TaskApiUpdateTest extends TestCase {
             "done" => 0
         ];
 
-        $response = $this->put("http://localhost/corso_php_tss/form_in_php/rest_api/task.php", $payload);
+        $response = $this->put("http://localhost/corso_php_tss/form_in_php/rest_api/task.php?task_id=5", $payload);
 
         //come print_r
         fwrite(STDERR, print_r($response, TRUE)); 
@@ -27,34 +27,34 @@ class TaskApiUpdateTest extends TestCase {
 
     public function put(string $url, array $body)
     {
-        $curl = curl_init();
-        
-        curl_setopt_array($curl, [
-          CURLOPT_URL => $url,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "PUT",
-          CURLOPT_POSTFIELDS => json_encode($body),
-          CURLOPT_HTTPHEADER => [
-            "Accept: */*",
-            "Content-Type: application/json",
-            "User-Agent: Thunder Client (https://www.thunderclient.com)"
-          ],
-        ]);
-        
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        
-        curl_close($curl);
-        
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-          return $response;
-        }
+      $curl = curl_init();
+      
+      curl_setopt_array($curl, [
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "PUT",
+        CURLOPT_POSTFIELDS => json_encode($body),
+        CURLOPT_HTTPHEADER => [
+          "Accept: */*",
+          "Content-Type: application/json",
+          "User-Agent: Thunder Client (https://www.thunderclient.com)"
+        ],
+      ]);
+      
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+      
+      curl_close($curl);
+      
+      if ($err) {
+        echo "cURL Error #:" . $err;
+      } else {
+        return $response;
+      }
     }
         
 }
