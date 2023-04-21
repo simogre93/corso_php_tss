@@ -3,30 +3,18 @@
 use PHPUnit\Framework\TestCase;
 require_once "./config1.php";
 
-class TaskApiCreateTest extends TestCase {
+class TaskApiDeleteTest extends TestCase {
 
-    public function test_create_task_api()
+    public function test_delete_task_api()
     { 
-        //(new PDO(DB_DSN,DB_USER,DB_PASSWORD))->query("TRUNCATE TABLE tasks;");
-        //payload contenuto da inviare
-        $payload = [
-            "user_id" => 2,
-            "name" => "fare i test delle task",
-            "due_date" => "2017-03-17",
-            "done" => 0
-        ];
+        $response = $this->delete("http://localhost/corso_php_tss/form_in_php/rest_api/task.php?task_id=3");
         
-        $response = $this->post("http://localhost/corso_php_tss/form_in_php/rest_api/task.php",$payload);
-
-        //$this->assertNull($response);
         //come print_r
         fwrite(STDERR, print_r($response, TRUE)); 
-        $this->assertJson($response);
-
-       
+        $this->assertJson($response); 
     }
 
-    public function post(string $url,array $body)
+    public function delete(string $url)
     {
         $curl = curl_init();
         
@@ -37,11 +25,9 @@ class TaskApiCreateTest extends TestCase {
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => json_encode($body),
+          CURLOPT_CUSTOMREQUEST => "DELETE",
           CURLOPT_HTTPHEADER => [
             "Accept: */*",
-            "Content-Type: application/json",
             "User-Agent: Thunder Client (https://www.thunderclient.com)"
           ],
         ]);
@@ -55,7 +41,7 @@ class TaskApiCreateTest extends TestCase {
           echo "cURL Error #:" . $err;
         } else {
           return $response;
-        }
+        } 
     }
         
 }
