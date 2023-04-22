@@ -1,10 +1,12 @@
 import './App.css';
-import { useState } from "react";
+import SearchBar from './components/SearchBar';
+//import { useState } from "react";
 import TaskItem from "./components/TaskItem/TakskItem";
 import TaskList from "./components/TaskList/TaskList";
 
 function App() {
   
+  const taskListData = []
   // const taskListData = [
   //   {
   //     task_id: 1,
@@ -22,27 +24,15 @@ function App() {
   //   }
   // ]
   
-  const [taskListData, setTaskListData] = useState([])
   
-  function aggiungiTask() {
-    setTaskListData((attuale)=>{
-      attuale.push({   
-        task_id: 4,
-        user_id: 3,
-        name: "andare dal dottore",
-        due_date: "2023-04-29",
-        done: false
-      })
-      return attuale;
-    });
-    //alert("tutto ok");
-  }
+  
   //const list = taskListData.map(task => <TaskItem nome_task={task.name} />)
   //console.log(list)
   return (
     
     <main>
-      <button onClick={aggiungiTask}>add task</button>
+      <SearchBar></SearchBar>
+      {/* <button onClick={aggiungiTask}>add task</button> */}
       <TaskList header={'Paolo'} task={taskListData}>
         {/* {list} */}
         
