@@ -1,5 +1,5 @@
 //npm init -y per creare modulo
-import { activeFilter, addTask, completedFilter, removeTask } from "./TodoService.js";
+import { activeFilter, addTask, completedFilter, removeTask, updateTask } from "./TodoService.js";
 //const user_id = 12
 const taskList = [
     {   
@@ -60,5 +60,12 @@ if (!(newTaskList.length == 4)) {
 const task_id = 13
 const removedTaskList = removeTask(task_id,newTaskList)
 console.log("--------------------")
-//console.log(removedTaskList)
+console.log(removedTaskList)
 
+const updatedTask = {
+    name:"nuovo nome",
+    task_id:12
+}
+const updateTaskList = updateTask(updatedTask,taskList)
+console.log("--------------------")
+console.log(updateTaskList)

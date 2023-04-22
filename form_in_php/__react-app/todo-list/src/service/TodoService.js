@@ -13,12 +13,20 @@ export const removeTask = (task_id, todos) => {
     const todosCopy = new Array(...todos)//anche todos.slice()
     //findindex, restituisce indice di quello che si cerca
     const indexToRemove = todosCopy.findIndex(task=>task.task_id == task_id)
-    todosCopy.slice(indexToRemove,1)
+    todosCopy.splice(indexToRemove,1)
     //console.log(indexToRemove)
-    
+    return todosCopy
 }
 
-export const updateTask = () => {}
+export const updateTask = (taskToUpdate, todos) => {
+    const todosCopy = new Array(...todos)
+    return todosCopy.map(task => {
+        if (task.task_id === taskToUpdate.task_id) {
+            return {...task,...taskToUpdate}//si aggiorna
+        }
+        return task
+    })
+}
 
 export const activeFilter = (todos) => {
     //filter, metodo array
