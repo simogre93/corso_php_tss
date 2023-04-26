@@ -50,22 +50,90 @@ const newTask = {
 //const altro = taskList;
 const newTaskList = addTask(newTask,taskList)
 
-console.log(newTaskList)
+//console.log(newTaskList)
 //console.log(altro)
 
 if (!(newTaskList.length == 4)) {
     console.log("test addtask fallito");
 }
 
-const task_id = 13
-const removedTaskList = removeTask(task_id,newTaskList)
-console.log("--------------------")
-console.log(removedTaskList)
-
-const updatedTask = {
-    name:"nuovo nome",
-    task_id:12
+const newTaskNoname = {
+    user_id:12,
+    due_date:"2023-04-24"
 }
-const updateTaskList = updateTask(updatedTask,taskList)
-console.log("--------------------")
-console.log(updateTaskList)
+
+try {
+    const addTaskNoname = addTask(newTaskNoname,taskList)
+    console.log("il test nome vuoto è fallito")
+} catch (error) {
+    if(!(error.message === "manca il nome della task")){
+        console.log("test fallito, non ho errore che mi aspettavo")
+    }
+    //console.log(error.message)
+}
+
+const emptyStringName = {
+    name:"",
+    user_id:12,
+    due_date:"2023-04-24"
+}
+
+try {
+    const addTaskNoname = addTask(emptyStringName,taskList)
+    console.log("il test stringa vuota è fallito")
+} catch (error) {
+    if(!(error.message === "manca il nome della task")){
+        console.log("test fallito, non ho errore che mi aspettavo")
+    }
+    //console.log(error.message)
+}
+
+const spaceStringName = {
+    name:"      ",
+    user_id:12,
+    due_date:"2023-04-24"
+}
+
+try {
+    const addTaskNoname = addTask(spaceStringName,taskList)
+    console.log("il test spazi vuoti è fallito")
+} catch (error) {
+    if(!(error.message === "manca il nome della task")){
+        console.log("test fallito, non ho errore che mi aspettavo")
+    }
+    //console.log(error.message)
+}
+
+const toTrimTask = {
+    name:" rinnovare patente     ",
+    user_id:12,
+    due_date:"2023-04-24"
+}
+
+
+    const addToTrimTask = addTask(toTrimTask,taskList)
+    //console.log("il test spazi vuoti è fallito")
+
+    const res = addToTrimTask.find(function(task, index){
+        return task.name == toTrimTask.name.trim()
+    })
+    
+    if (res == undefined) {
+        console.log("test fallito addtrimtask")
+    }
+    console.log("sno res", res)
+//console.log(addTaskNoname)
+
+// const task_id = 13
+// const removedTaskList = removeTask(task_id,newTaskList)
+// console.log("--------------------")
+// console.log(removedTaskList)
+
+// const updatedTask = {
+//     name:"fare i compiti",
+//     task_id:12
+// }
+
+// const updateTaskList = updateTask(updatedTask,taskList)
+// console.log("--------------------")
+// console.log(updateTaskList)

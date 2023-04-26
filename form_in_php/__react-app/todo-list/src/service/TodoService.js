@@ -1,9 +1,13 @@
 export const addTask = (newTask,todos) =>{
+    //console.log(newTask.name);
+    if (newTask.name === undefined || newTask.name.trim() === "") {
+        throw new Error("manca il nome della task")
+    }
     //1,todos viene trasformata anche fuori da questa funzione
     //2, fare copia, cambiarla e restiruirla
     const todosCopy = new Array(...todos)//si ottiene un copia debole, shallow copy, oggetti poco complicati
-    const newTaskCopy = {...newTask}
-    newTaskCopy.task_id = (new Date).getTime()
+    const newTaskCopy = {...newTask,...{name:newTask.name.trim()}}
+    newTaskCopy.task_id = (new Date).getTime()//tra parentesi per usare subito istanza di Date
     //push restituisce nuova lunghezza
     todosCopy.push(newTaskCopy)
     return todosCopy
@@ -29,7 +33,7 @@ export const updateTask = (taskToUpdate, todos) => {
 }
 
 export const activeFilter = (todos) => {
-    //filter, metodo array
+    //filter, metodo array, fa anche una copia
     return todos.filter(task => !task.done)
 }
 
