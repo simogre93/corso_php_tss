@@ -16,7 +16,7 @@ export const addTask = (newTask,todos) =>{
 export const removeTask = (task_id, todos) => {
     const todosCopy = new Array(...todos)//anche todos.slice()
     //findindex, restituisce indice di quello che si cerca
-    const indexToRemove = todosCopy.findIndex(task=>task.task_id == task_id)
+    const indexToRemove = todosCopy.findIndex(task=>task.task_id === task_id)
     todosCopy.splice(indexToRemove,1)
     //console.log(indexToRemove)
     return todosCopy
