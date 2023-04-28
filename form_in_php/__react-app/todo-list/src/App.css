@@ -91,6 +91,16 @@ li.done {
   text-decoration: line-through;
 }
 
+.edit_btn {
+  background-color: yellow;
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .delete_btn {
   background-color: red;
   color: black;

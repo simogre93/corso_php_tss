@@ -35,6 +35,7 @@ export const updateTask = (taskToUpdate, todos) => {
 export const activeFilter = (todos) => {
     //filter, metodo array, fa anche una copia
     return todos.filter(task => !task.done)
+    //return act
 }
 
 export const completedFilter = todos => todos.filter(task => task.done)
