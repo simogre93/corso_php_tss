@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function App() {
   
+  //per i dati
   const [taskListData, setTaskListData] = useState([
         {
           task_id: 1,
@@ -41,18 +42,21 @@ function App() {
   //   }
   // ]
   
+  //per la visualizzazione
   const [filtredTask, setFiltredTask] = useState(taskListData)
 
   function parentAddTask(newTask) {
     const newTaskListData = addTask(newTask,taskListData)
     //console.log(newTaskListData)
     setTaskListData(newTaskListData)
+    //setFiltredTask(newTaskListData)
   }
   
   function parentRemoveTask(taskId) {
-      //console.log("parent"+ taskId)
-      const res = removeTask(taskId,taskListData)
-      setTaskListData(res)
+    //console.log("parent"+ taskId)
+    const res = removeTask(taskId,taskListData)
+    setTaskListData(res)
+    //setFiltredTask(res)
   }
 
   function onShowActive(){

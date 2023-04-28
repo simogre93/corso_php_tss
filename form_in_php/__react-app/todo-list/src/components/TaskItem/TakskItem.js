@@ -9,13 +9,14 @@ function TaskItem({nome_task, done, task_id, parentRemoveTask}) {
   }
 
   function onUpdateStatus(event) {
-    
+    setDoneCheckbox(event.target.checked)
+    //done = !doneCheckbox
   }
 
   return (
     <li className={done ? 'done' : ''}>
       {/* {doneCheckbox ? <h1>FATTO</h1> :  <h1>DA FARE</h1> } */}
-        <input type="checkbox" onChange={(event)=>setDoneCheckbox(event.target.checked)} checked={doneCheckbox} />
+        <input type="checkbox" onChange={evento => onUpdateStatus(evento)} checked={doneCheckbox} />
         {done}
         <label htmlFor="task1" className="to_do">{nome_task}</label>
         <button className="edit_btn">edit</button>
