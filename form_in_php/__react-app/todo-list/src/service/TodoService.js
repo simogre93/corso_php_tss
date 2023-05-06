@@ -7,7 +7,7 @@ export const addTask = (newTask,todos) =>{
     //2, fare copia, cambiarla e restiruirla
     const todosCopy = new Array(...todos)//si ottiene un copia debole, shallow copy, oggetti poco complicati
     const newTaskCopy = {...newTask,...{name:newTask.name.trim()}}
-    newTaskCopy.task_id = (new Date).getTime()//tra parentesi per usare subito istanza di Date
+    newTaskCopy.task_id = (new Date()).getTime()//tra parentesi per usare subito istanza di Date
     //push restituisce nuova lunghezza
     todosCopy.push(newTaskCopy)
     return todosCopy
@@ -22,14 +22,15 @@ export const removeTask = (task_id, todos) => {
     return todosCopy
 }
 
-export const updateTask = (taskToUpdate, todos) => {
+export const updateTask = (task_id, todos) => {
     const todosCopy = new Array(...todos)
-    return todosCopy.map(task => {
-        if (task.task_id === taskToUpdate.task_id) {
-            return {...task,...taskToUpdate}//si aggiorna
+    const taskToUpdate = todosCopy.map(task => {
+        if (task.task_id === task_id) {
+            task.done = !task.done 
         }
         return task
     })
+    return taskToUpdate
 }
 
 export const activeFilter = (todos) => {
@@ -42,3 +43,28 @@ export const completedFilter = todos => todos.filter(task => task.done)
 
 
 export const dateFilter = () => {}
+
+//API
+
+const baseUrl = "http://localhost/corso_php_tss/form_in_php/rest_api/task.php"
+
+export const getTaskApi = () => {
+    return fetch(baseUrl).then((res)=>res.json())
+}
+
+export  const addTaskApi = (newTask) => {
+    let headersList = {
+        "Accept": "*/*",
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        "Content-Type": "application/json"
+       }
+       
+    return fetch(baseUrl, { 
+         method: "POST",
+         body: JSON.stringify(newTask),
+         headers: headersList
+       }).then(response=>response.json())
+       
+    //    let data = response.text();
+    //    console.log(data);
+}

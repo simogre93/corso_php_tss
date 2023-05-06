@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+//cosa succede quando utente scrive
 //props arriva dall'esterno del componente
 const SearchBar = (props) => {
     
@@ -18,6 +19,7 @@ const SearchBar = (props) => {
         }
         props.parentAddTask(newTask)
         setTaskName('')
+        setTaskDueDate('')
     }
                   
     return (

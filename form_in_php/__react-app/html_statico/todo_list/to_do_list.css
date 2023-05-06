@@ -86,7 +86,8 @@ button {
     border-radius: 5px;
 }
 
-input:checked + label {
+/* input:checked + label  */
+.done {
     text-decoration: line-through;
 }
 

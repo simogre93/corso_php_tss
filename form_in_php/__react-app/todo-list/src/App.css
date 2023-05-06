@@ -86,8 +86,8 @@ button {
   border-radius: 5px;
 }
 
-/* input:checked + label  */
-li.done {
+/* input:checked + label   */
+li.task {
   text-decoration: line-through;
 }
 

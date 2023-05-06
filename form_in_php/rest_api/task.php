@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 use crud\TaskCRUD;
 use models\Task;
 

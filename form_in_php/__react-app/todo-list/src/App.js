@@ -2,60 +2,54 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import TaskItem from "./components/TaskItem/TakskItem";
 import TaskList from "./components/TaskList/TaskList";
-import { activeFilter, addTask, completedFilter, removeTask } from './service/TodoService';
-import { useState } from "react";
+import { activeFilter, addTask, addTaskApi, completedFilter, getTaskApi, removeTask, updateTask } from './service/TodoService';
+import { useEffect, useState } from "react";
 
 function App() {
   
-  //per i dati
-  const [taskListData, setTaskListData] = useState([
-        {
-          task_id: 1,
-          user_id: 2,
-          name: "fare la spesa",
-          due_date: "2023-04-21",
-          done: true
-        },
-        {
-          task_id: 4,
-          user_id: 3,
-          name: "andare dal dottore",
-          due_date: "2023-04-29",
-          done: false
-        }
-  ]);
-  // const taskListData = []
-  // const taskListData = [
-  //   {
-  //     task_id: 1,
-  //     user_id: 2,
-  //     name: "fare la spesa",
-  //     due_date: "2023-04-21",
-  //     done: true
-  //   },
-  //   {
-  //     task_id: 4,
-  //     user_id: 3,
-  //     name: "andare dal dottore",
-  //     due_date: "2023-04-29",
-  //     done: false
-  //   }
-  // ]
   
+
+  let taskList  = localStorage.getItem('taskList')
+  console.log('tasklist')
+  if (taskList == null) {
+    taskList = [];
+  } else {
+    taskList = JSON.parse(taskList)
+  }
+  //per i dati
+  const [taskListData, setTaskListData] = useState([]);
   //per la visualizzazione
   const [filtredTask, setFiltredTask] = useState(taskListData)
+
+  useEffect(()=>{
+    getTaskApi().then(json=>{
+    setTaskListData(json.data)
+  })},[])
 
   function parentAddTask(newTask) {
     const newTaskListData = addTask(newTask,taskListData)
     //console.log(newTaskListData)
     setTaskListData(newTaskListData)
-    //setFiltredTask(newTaskListData)
+    setFiltredTask(newTaskListData)
+    localStorage.setItem('taskList', JSON.stringify(newTaskListData))
+    useEffect(()=>{
+      addTaskApi(newTask)
+    }, [])
   }
   
   function parentRemoveTask(taskId) {
     //console.log("parent"+ taskId)
     const res = removeTask(taskId,taskListData)
     setTaskListData(res)
+    setFiltredTask(res)
+    localStorage.setItem('taskList', JSON.stringify(res))
+  }
+
+  function parentUpdateTask(taskId) {
+    //console.log("parent"+ taskId)
+    const res = updateTask(taskId,taskListData)
+    setTaskListData(res)
+    localStorage.setItem('taskList', JSON.stringify(res))
     //setFiltredTask(res)
   }
 
@@ -72,9 +66,10 @@ function App() {
     // chiamo il servizio 
     // aggiorno lo stato
     const completed = completedFilter(taskListData)
+    setTaskListData(completed)
     setFiltredTask(completed)
     //console.log(completed)
-  }
+  } 
 
   function onShowAll() {
     setFiltredTask(taskListData)
@@ -99,6 +94,7 @@ function App() {
                                               done={task.done} 
                                               nome_task={task.name}
                                               parentRemoveTask={parentRemoveTask}
+                                              parentUpdateTask={parentUpdateTask}
                                               />)}
       </TaskList>
       {/* <TaskList header={'Giovanni'} task={taskListData}>
